@@ -1,0 +1,46 @@
+<div class="container">
+
+  <!-- Jumbotron Header -->
+  <header class="jumbotron my-4">
+    <h1 class="display-3">A Warm Welcome!</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+    <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+  </header>
+
+  <!-- Page Features -->
+  <div class="row text-left">
+      <div class="col-sm-2">
+        <div class="row" *ngFor="let docCats of docCat;"    style="margin-block-end: 15px;">
+          <div class="col-sm-12">{{docCats.CategoryName}} ({{docCats.Total}})</div>
+        </div>
+      </div>
+      <div class="col-sm-10">
+        <div *ngFor="let docCats of docCat">
+          <ng-container *ngIf="docCats.Total > 0">
+            <hr class="featurette-divider">
+            <h3>{{docCats.CategoryName}}</h3>
+            <div class="row" *ngFor="let docDatas of docData;"  >
+              <ng-container *ngIf="docDatas.ItemCategory === docCats.Id">
+                <div class="col">
+                  <img class="" src="{{docDatas.Image}}" alt="First slide">
+                </div>
+                <div class="col-6 text-left">
+                  <h4>{{docDatas.ItemName}}</h4>
+                  <p>₹150.00</p>
+                  <p>{{docDatas.BasicDesc}}</p>
+                </div>
+                <div class="col text-right">
+                  <a class="btn btn-sm btn-primary" href="#" role="button">Add to Cart</a>
+                </div>
+                <!-- <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                  <hr class="featurette-divider">
+                </div> -->
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+  </div>
+  <!-- /.row -->
+
+</div>

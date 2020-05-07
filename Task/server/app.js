@@ -71,6 +71,16 @@ app.post('/updateUser', upload.single('file'), function (req, res) {
     if(!userEmail) return false;
     dbFunctions.updateUser(filename,userEmail,req,res);
 });
+
 app.use('/resources',express.static(__dirname + '/upload/profile'));
+
+app.get('/getBodyData', jsonParser, function (req, res) {
+    var dbFunctions = require('./models/connector');
+    dbFunctions.getBodyData(req,res);
+});
+app.get('/getMenuCategory', jsonParser, function (req, res) {
+    var dbFunctions = require('./models/connector');
+    dbFunctions.getMenuCategory(req,res);
+});
 
 app.listen(process.env.PORT, ()=> console.log('readylocalhost:' + process.env.PORT));

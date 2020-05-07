@@ -13,6 +13,10 @@ import { RegisterComponent } from './customer/register/register.component';
 import { appRoutes } from './routes';
 import { SigninComponent } from './customer/signin/signin.component';
 import { AuthGuardService} from './shared/auth-guard.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { BodyComponent } from './body/body.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
@@ -20,7 +24,11 @@ import { AuthGuardService} from './shared/auth-guard.service';
     AppComponent,
     CustomerComponent,
     RegisterComponent,
-    SigninComponent
+    SigninComponent,
+    HeaderComponent,
+    FooterComponent,
+    BodyComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

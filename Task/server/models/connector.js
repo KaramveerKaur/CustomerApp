@@ -155,5 +155,54 @@ module.exports = {
           if (error) throw error; // Don't use the connection here, it has been returned to the pool.
         });
     });
+  },
+  getBodyData: function (input, res) {
+    pool.getConnection(function (err, connection) {
+      if (err) throw err; // not connected!
+
+        var sql = 'SELECT * FROM `menubox` where `Status`= 1';
+        var values = [input]
+        // Use the connection
+        connection.query(sql, values, function (error, results, fields) {
+          if (error) {
+            resultsNotFound["errorMessage"] = "Something went wrong with Server.";
+            return res.send(resultsNotFound);
+          }
+          if (results =="") {
+            resultsNotFound["errorMessage"] = "Data not found.";
+            return res.send(resultsNotFound);
+          }
+          resultsFound["data"] = results;
+          res.send(resultsFound);
+          // When done with the connection, release it.
+          connection.release(); // Handle error after the release.
+          if (error) throw error; // Don't use the connection here, it has been returned to the pool.
+        });
+      });
+  },
+  getMenuCategory: function (input, res) {
+    pool.getConnection(function (err, connection) {
+      if (err) throw err; // not connected!
+
+        //var sql = 'SELECT `ItemCategory.Id`,`ItemCategory.CategoryName`,`COUNT(menubox.ItemCategory) AS `Total` FROM `ItemCategory` LEFT JOIN menubox ON `ItemCategory.Id` = `menubox.ItemCategory` where `ItemCategory.Status` = 1 GROUP BY `ItemCategory.Id`,`ItemCategory.CategoryName`';
+        var sql = 'SELECT ItemCategory.Id, ItemCategory.CategoryName, COUNT(menubox.ItemCategory) AS Total FROM `ItemCategory` LEFT JOIN menubox ON ItemCategory.Id = menubox.ItemCategory where ItemCategory.Status = 1 GROUP BY ItemCategory.Id, ItemCategory.CategoryName';
+        var values = []
+        // Use the connection
+        connection.query(sql, values, function (error, results, fields) {
+          if (error) {
+            resultsNotFound["errorMessage"] = "Something went wrong with Server.";
+            return res.send(resultsNotFound);
+          }
+          if (results =="") {
+            resultsNotFound["errorMessage"] = "Data not found.";
+            return res.send(resultsNotFound);
+          }
+          resultsFound["data"] = results;
+          res.send(resultsFound);
+          // When done with the connection, release it.
+          connection.release(); // Handle error after the release.
+          if (error) throw error; // Don't use the connection here, it has been returned to the pool.
+        });
+      });
   }
 };
