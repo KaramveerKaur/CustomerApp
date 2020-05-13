@@ -11,7 +11,7 @@
   <!-- Page Features -->
   <div class="row text-left">
       <div class="col-sm-2">
-        <div class="row" *ngFor="let docCats of docCat;"    style="margin-block-end: 15px;">
+        <div class="row" *ngFor="let docCats of docCat"    style="margin-block-end: 15px;">
           <div class="col-sm-12">{{docCats.CategoryName}} ({{docCats.Total}})</div>
         </div>
       </div>
@@ -37,6 +37,11 @@
                   <button type="button" class="btn btn-primary" (click)= "handleAddToCart(docDatas)">
                     Add To Cart
                   </button>
+                  <!-- <div class="def-number-input number-input safari_only">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+                    <input class="quantity" min="0" max="10" name="quantity" value="0" type="number" (click)= "handleAddToCart(docDatas)">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                  </div> -->
                 </div>
               </ng-container>
             </div>

@@ -68,6 +68,7 @@ export class MenuComponent implements OnInit {
     //console.log("sssss"+Id+"pppp"+Price);
    //var dataNew = [Id,Price];
     //var dataNew =  {Id:Id, Price:Price,};
+    docDatas.Qty = 1;
     this._messengerlService.sendMessage(docDatas);
   }
   

@@ -1,5 +1,6 @@
 <div class="container bg-light">
   <div class="py-5 text-center">
+    &nbsp;&nbsp;&nbsp;
     <!-- <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
     <h2>Checkout form</h2>
     <!-- <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p> -->
@@ -17,33 +18,52 @@
             <h6 class="my-0">{{item.ItemName}}</h6>
             <small class="text-muted">Brief description</small>
           </div>
+          
+          <!-- <span class="text-muted"><input type="number" value="{{item.Qty}}" min="0" max="10" step="1"/></span> -->
+          <span class="def-number-input number-input safari_only">
+            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus" (click)= "handleUpdateCart(item.Id,myInput.value)"></button>
+            <input class="quantity" min="0" max="10" value="1" name="quantity" type="number" #myInput>
+            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus" (click)= "handleUpdateCart(item.Id,myInput.value)"></button>
+          </span>
           <span class="text-muted">₹{{item.Price}}</span>
         </li>
         
-        <li class="list-group-item d-flex justify-content-between bg-light">
+        <!-- <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success">
             <h6 class="my-0">Promo code</h6>
             <small>EXAMPLECODE</small>
           </div>
           <span class="text-success">-$5</span>
+        </li> -->
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Sub Total</span>
+          <strong>₹{{cartSubTotal}}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Delivery Charge</span>
+          <strong>₹{{delCharge}}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Tax</span>
+          <strong>₹{{totalTax}}</strong>
         </li>
         <li class="list-group-item d-flex justify-content-between">
           <span>Total</span>
-          <strong>$20</strong>
+          <strong>₹{{cartTotal}}</strong>
         </li>
       </ul>
 
-      <form class="card p-2">
+      <!-- <form class="card p-2">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Promo code">
           <div class="input-group-append">
             <button type="submit" class="btn btn-secondary">Redeem</button>
           </div>
         </div>
-      </form>
+      </form> -->
     </div>
     <div class="col-md-8 order-md-1">
-      <h4 class="mb-3">Billing address</h4>
+      <h4 class="mb-3">Delivery Address</h4>
       <form class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -62,7 +82,7 @@
           </div>
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="username">Username</label>
           <div class="input-group">
             <div class="input-group-prepend">
@@ -73,15 +93,15 @@
               Your username is required.
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="email">Email <span class="text-muted">(Optional)</span></label>
           <input type="email" class="form-control" id="email" placeholder="you@example.com">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
-        </div>
+        </div> -->
 
         <div class="mb-3">
           <label for="address">Address</label>
@@ -125,7 +145,7 @@
             </div>
           </div>
         </div>
-        <hr class="mb-4">
+        <!-- <hr class="mb-4">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="same-address">
           <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
@@ -133,7 +153,7 @@
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="save-info">
           <label class="custom-control-label" for="save-info">Save this information for next time</label>
-        </div>
+        </div> -->
         <hr class="mb-4">
 
         <!-- <h4 class="mb-3">Payment</h4>
@@ -187,7 +207,7 @@
         </div>
         <hr class="mb-4"> -->
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-        <hr class="mb-4">
+        &nbsp;&nbsp;&nbsp;
       </form>
     </div>
   </div>
