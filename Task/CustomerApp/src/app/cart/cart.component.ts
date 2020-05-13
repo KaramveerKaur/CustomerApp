@@ -47,13 +47,14 @@ export class CartComponent implements OnInit {
       this.totalTax = this.cartSubTotal * this.taxPer;
       this.cartTotal = this.cartSubTotal + this.totalTax;
     }else{
+      this.delCharge = 15;
       var taxSub = this.cartSubTotal + this.delCharge;
       this.totalTax = taxSub * this.taxPer;
       this.cartTotal = taxSub + this.totalTax;
     }
   }
   placeOrder(){
-    
+
   }
 
 }
