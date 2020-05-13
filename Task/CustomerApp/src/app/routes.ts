@@ -6,6 +6,7 @@ import { RegisterComponent } from './customer/register/register.component';
 import { SigninComponent } from './customer/signin/signin.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
+import { CartComponent } from './cart/cart.component';
 
 //import { FooterComponent } from './footer/footer.component';
 //import { BodyComponent } from './body/body.component';
@@ -18,10 +19,11 @@ export const appRoutes : Routes = [
 	path:'register' , component: RegisterComponent,
 	//children: [{path: '', component: RegisterComponent }]
 },
-{ path:'' , redirectTo: '/register',pathMatch: 'full'},
+{ path:'' , redirectTo: '/thechilika',pathMatch: 'full'},
 { path: 'signin', component: SigninComponent },
 { path: 'thechilika', component: HeaderComponent },
 { path: 'menu', component: MenuComponent },
+{ path: 'cart', component: CartComponent },
 { path: 'customer', component: CustomerComponent,canActivate: [AuthGuardService]}
 
 ];

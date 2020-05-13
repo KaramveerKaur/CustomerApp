@@ -82,5 +82,8 @@ app.get('/getMenuCategory', jsonParser, function (req, res) {
     var dbFunctions = require('./models/connector');
     dbFunctions.getMenuCategory(req,res);
 });
-
+app.get('/getFoodMenuData', jsonParser, function (req, res) {
+    var dbFunctions = require('./models/connector');
+    dbFunctions.getFoodMenuData(req,res);
+});
 app.listen(process.env.PORT, ()=> console.log('readylocalhost:' + process.env.PORT));

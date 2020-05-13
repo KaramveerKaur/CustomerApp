@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { FrontendService } from '../shared/frontend.service';
 import { FormBuilder, } from '@angular/forms';
+//import { ModalService } from '../shared/modal.service';
+import { MessengerService } from '../shared/messenger.service';
+
 
 @Component({
   selector: 'app-menu',
@@ -17,14 +20,16 @@ export class MenuComponent implements OnInit {
   success: boolean = false;
   successMessage: String = "";
 
-  constructor(private _route: Router,private _frontendService: FrontendService, private formBuilder: FormBuilder) { }
+
+  constructor(private _route: Router, private _frontendService: FrontendService, 
+    private formBuilder: FormBuilder, private _messengerlService: MessengerService) { }
 
   ngOnInit() {
     this.getData();
     this.getMenuCategory();
   }
   getData(){
-    this.querySubscription = this._frontendService.getBodyData().subscribe((res) => {
+    this.querySubscription = this._frontendService.getFoodMenuData().subscribe((res) => {
       if (res["errorCode"] > 0) {
           this.error = false;
           this.errorMessage = "";
@@ -59,5 +64,12 @@ export class MenuComponent implements OnInit {
       }
     );
   }
+  handleAddToCart(docDatas){
+    //console.log("sssss"+Id+"pppp"+Price);
+   //var dataNew = [Id,Price];
+    //var dataNew =  {Id:Id, Price:Price,};
+    this._messengerlService.sendMessage(docDatas);
+  }
+  
 
 }

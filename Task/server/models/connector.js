@@ -183,10 +183,34 @@ module.exports = {
   getMenuCategory: function (input, res) {
     pool.getConnection(function (err, connection) {
       if (err) throw err; // not connected!
-
-        //var sql = 'SELECT `ItemCategory.Id`,`ItemCategory.CategoryName`,`COUNT(menubox.ItemCategory) AS `Total` FROM `ItemCategory` LEFT JOIN menubox ON `ItemCategory.Id` = `menubox.ItemCategory` where `ItemCategory.Status` = 1 GROUP BY `ItemCategory.Id`,`ItemCategory.CategoryName`';
+      
         var sql = 'SELECT ItemCategory.Id, ItemCategory.CategoryName, COUNT(menubox.ItemCategory) AS Total FROM `ItemCategory` LEFT JOIN menubox ON ItemCategory.Id = menubox.ItemCategory where ItemCategory.Status = 1 GROUP BY ItemCategory.Id, ItemCategory.CategoryName';
         var values = []
+        // Use the connection
+        connection.query(sql, values, function (error, results, fields) {
+          if (error) {
+            resultsNotFound["errorMessage"] = "Something went wrong with Server.";
+            return res.send(resultsNotFound);
+          }
+          if (results =="") {
+            resultsNotFound["errorMessage"] = "Data not found.";
+            return res.send(resultsNotFound);
+          }
+          resultsFound["data"] = results;
+          res.send(resultsFound);
+          // When done with the connection, release it.
+          connection.release(); // Handle error after the release.
+          if (error) throw error; // Don't use the connection here, it has been returned to the pool.
+        });
+      });
+  },
+  getFoodMenuData: function (input, res) {
+    pool.getConnection(function (err, connection) {
+      if (err) throw err; // not connected!
+
+        var sql = 'SELECT menubox.Id, menubox.ItemName, menubox.BasicDesc, menubox.Image, menubox.Type, menubox.Availability, menubox.ItemCategory,menuprice.Id, menuprice.Price FROM `menubox` LEFT JOIN `menuprice` ON menuprice.menuboxId = menubox.Id where menubox.Status = 1 and menubox.RestaurantId = 1';
+
+        var values = [input]
         // Use the connection
         connection.query(sql, values, function (error, results, fields) {
           if (error) {
